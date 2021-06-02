@@ -16,7 +16,7 @@ public class AddressBook {
             System.out.println("There are no people in this Address Book");
         } else {
             for (int i = 0; i < people.size(); i++) {
-                System.out.println((i + 1) + ". " + people.get(i).toString() + "\n\n");
+                System.out.println((i + 1) + ". " + people.get(i).toString() + "\n");
             }
         }
     }
@@ -37,13 +37,17 @@ public class AddressBook {
         System.out.println("\nState: ");
         String state = scan.nextLine();
         System.out.println("\nZip Code: ");
-        int zip = scan.nextInt();
+        try {
+            int zip = scan.nextInt();
+            scan.nextLine();
+        } catch (Exception e) {
+            System.out.println("Please Print a Number");
+        }
         System.out.println("\nAlternative Address: ");
         String altAddress = scan.nextLine();
 
-        Person person = new Person(phoneNumber, firstName, lastName, address, town, zip, state, altAddress);
-        System.out.println(person.toString() + "\nNew Person Added");
-        people.add(person);
+        people.add(new Person(phoneNumber, firstName, lastName, address, town, zip, state, altAddress));
+        System.out.println("\nNew Person Added");
 
     }
 
@@ -120,10 +124,18 @@ public class AddressBook {
 
     public void delPerson() {
         Scanner scan = new Scanner(System.in);
-        this.printBook();
-        System.out.println("Which Address Would You Like to Delete?");
-        int i = scan.nextInt() - 1;
-        people.remove(i);
+        if (people.size() < 1) {
+            System.out.println("There are no Addresses to delete");
+        } else {
+            System.out.println("Which Address Would You Like to Delete?");
+            this.printBook();
+            int i = scan.nextInt() - 1;
+            if (i < 0 || i > people.size()) {
+                System.out.print("Invalid Option");
+            }
+            people.remove(i);
+        }
+
     }
 
     public void editPerson() {
@@ -187,5 +199,9 @@ public class AddressBook {
             }
 
         }
+    }
+
+    public int getSize() {
+        return people.size();
     }
 }

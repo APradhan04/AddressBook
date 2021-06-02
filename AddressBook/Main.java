@@ -7,7 +7,19 @@ public class Main {
         AddressBook addressBook = new AddressBook();
         boolean flag = true;
         while (flag) {
-            System.out.println("Address Book Menu: ");
+            if (addressBook.getSize() < 1) {
+                System.out.println("1. Add Person to Address Book");
+                System.out.println("2. Quit");
+                int y = scan.nextInt();
+                if (y == 1) {
+                    addressBook.addPerson();
+                } else if (y == 2) {
+                    flag = false;
+                } else {
+                    System.out.println("Please Choose Again");
+                }
+            }
+            System.out.println("\nAddress Book Menu: ");
             System.out.println("1. Display Address Book");
             System.out.println("2. Search Address Book");
             System.out.println("3. Add Person to Address Book");

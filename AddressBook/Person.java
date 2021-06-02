@@ -8,6 +8,7 @@ public class Person {
     private int zip;
     private String state;
     private String altAddress;
+    private static int ids = 10000;
     private int idNumber;
 
     // Constructors
@@ -24,11 +25,7 @@ public class Person {
         zip = z;
         state = s;
         altAddress = aA;
-        int plcHolder = 1;
-        for (int i = 0; i < 5; i++) {
-            idNumber += (int) (Math.random() * 10) * plcHolder;
-            plcHolder *= 10;
-        }
+        idNumber = ids++;
     }
 
     // Getter Methods
@@ -109,7 +106,7 @@ public class Person {
 
     public String toString() {
         return "Name: " + lastName + ", " + firstName + "\nPhone Number: " + phoneNumber + "\nAddress: \n"
-                + streetAddress + "\n" + town + ", " + state + " " + zip + "\nAlternate Address\n" + altAddress + "\n"
+                + streetAddress + "\n" + town + ", " + state + " " + zip + "\nAlternate Address:\n" + altAddress + "\n"
                 + town + ", " + state + " " + zip + "\nID Number: " + idNumber;
     }
 }
